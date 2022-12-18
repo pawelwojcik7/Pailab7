@@ -49,7 +49,7 @@ public class StudentService {
         }
         else{
       studentRepository.updateStudentDataWithNewName(
-          student.getName(), student.getSurname(), student.getAverage(), student.getId());
+          student.getName(), student.getSurName(), student.getAverage(), student.getId());
         }
 
     }

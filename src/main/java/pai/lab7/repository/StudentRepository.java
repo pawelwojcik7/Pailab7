@@ -15,7 +15,7 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
   Optional<Student> findStudentById(Long id);
 
   @Modifying
-  @Query("update student set name = :name, surname = :surname, average = :average where id = :id")
+  @Query("update student set name = :name, surName = :surname, average = :average where id = :id")
   void updateStudentDataWithNewName(
       @Param("name") String name,
       @Param("surname") String surname,

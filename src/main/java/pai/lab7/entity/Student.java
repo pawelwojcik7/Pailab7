@@ -21,8 +21,8 @@ public class Student {
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "sur_name")
+    private String surName;
     @Column(name = "average")
     private Double average;
 

@@ -60,7 +60,6 @@ function modifyStudent()
             if (response.status !== 200) {
                 return Promise.reject("Cos poszlo nie tak");
             }
-            return response.json();
         })
         .then(getAllStudents)
 
