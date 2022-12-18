@@ -16,32 +16,42 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    @CrossOrigin("http://localhost:63342")
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getAll(){
-        return ResponseEntity.ok().body(studentService.getAll());
+
+        return ResponseEntity.ok().body(
+                studentService.getAll());
     }
 
+    @CrossOrigin("http://localhost:63342")
     @PostMapping("/student")
     public ResponseEntity<?> addStudent(@RequestBody Student student){
         studentService.addStudent(student);
         return ResponseEntity.ok().build();
     }
 
+    @CrossOrigin("http://localhost:63342")
     @DeleteMapping("/student/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable Long id){
         try {
             studentService.deleteStudent(id);
+            return ResponseEntity.ok().body("Student został usunięty");
         } catch (StudentNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok().body("Student został usunięty");
     }
 
-    @PutMapping("/student/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable Long id, @RequestBody Student student){
+    @CrossOrigin("http://localhost:63342")
+    @PutMapping("/student")
+    public ResponseEntity<?> updateStudent(@RequestBody Student student){
 
-        //trzeba uzupełnic serwis i repo o update
-        return null;
+        try {
+            studentService.updateStudent(student);
+            return ResponseEntity.ok().body("Student został zaktualizowany");
+        } catch (StudentNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import pai.lab7.entity.Student;
 import pai.lab7.exception.StudentNotFoundException;
 import pai.lab7.repository.StudentRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,17 +38,18 @@ public class StudentService {
             studentRepository.delete(probablyStudent.get());
         }
     }
+    @Transactional
+    public void updateStudent(Student student) throws StudentNotFoundException{
 
-    public void updateStudent(Long id, Student student) throws StudentNotFoundException{
-
-        Optional<Student> probablyStudent = studentRepository.findStudentById(id);
+        Optional<Student> probablyStudent = studentRepository.findStudentById(student.getId());
 
         if(probablyStudent.isEmpty())
         {
-            throw new StudentNotFoundException(id);
+      throw new StudentNotFoundException(student.getId());
         }
         else{
-            // update student
+      studentRepository.updateStudentDataWithNewName(
+          student.getName(), student.getSurname(), student.getAverage(), student.getId());
         }
 
     }
