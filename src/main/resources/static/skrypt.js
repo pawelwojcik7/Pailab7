@@ -12,9 +12,9 @@ function deleteStudent(){
         }
     })
         .then((response) => {
-            if (response.status !== 200) {
-                return Promise.reject("Cos poszlo nie tak")
-            }
+
+                response.text().then(body => komunikat(body));
+
         })
         .then(getAllStudents)
 }
@@ -34,10 +34,7 @@ function addStudent()
         }
     })
         .then((response) => {
-            if (response.status !== 200) {
-                console.log(response.json());
-                return Promise.reject('Coś poszło nie tak!');
-            }
+            response.text().then(body => komunikat(body));
         }).then(getAllStudents)
 
 }
@@ -57,9 +54,9 @@ function modifyStudent()
         }
     })
         .then((response) => {
-            if (response.status !== 200) {
-                return Promise.reject("Cos poszlo nie tak");
-            }
+
+                response.text().then(body => komunikat(body));
+
         })
         .then(getAllStudents)
 
@@ -103,4 +100,10 @@ function pokazTabele(response) {
     }
     content += "</tbody></table>";
     main.innerHTML = content;
+}
+
+function komunikat(body){
+    var komunikat = document.getElementById('komunikat');
+    content = "<h2>" + body + "</h2>"
+    komunikat.innerHTML = content
 }
